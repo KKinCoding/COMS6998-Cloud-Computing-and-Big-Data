@@ -78,7 +78,7 @@ Resources:
   photosBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: photoalbumcoms1
+      BucketName: photoalbumcoms3
   ESInstance:
     Type: 'AWS::OpenSearchService::Domain'
     Properties:
