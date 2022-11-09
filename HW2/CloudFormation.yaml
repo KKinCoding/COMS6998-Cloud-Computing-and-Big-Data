@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Lambda
 Resources:
-  indexPhoto:
+  indexPhototest:
     Type: 'AWS::Lambda::Function'
     Properties:
       Code:
@@ -16,8 +16,8 @@ Resources:
       Role: 'arn:aws:iam::284091107813:role/CloudFormationPipeline'
       Timeout: 30
       Runtime: python3.9
-      FunctionName: index-photos
-  searchPhotos:
+      FunctionName: test2-index-photos
+  searchPhotostest:
     Type: 'AWS::Lambda::Function'
     Properties:
       Code:
@@ -32,7 +32,7 @@ Resources:
       Role: 'arn:aws:iam::284091107813:role/CloudFormationPipeline'
       Timeout: 30
       Runtime: python3.9
-      FunctionName: search-photos
+      FunctionName: test2-search-photos
   ServerlessRestApiDeploymentb2888a1f04:
     Type: 'AWS::ApiGateway::Deployment'
     Properties:
@@ -53,7 +53,7 @@ Resources:
                 httpMethod: POST
                 type: aws_proxy
                 uri: !Sub >-
-                  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${searchPhotos.Arn}/invocations
+                  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${searchPhotostest.Arn}/invocations
               responses: {}
           /upload-photos:
             put:
@@ -61,7 +61,7 @@ Resources:
                 httpMethod: POST
                 type: aws_proxy
                 uri: !Sub >-
-                  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${searchPhotos.Arn}/invocations
+                  arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${searchPhotostest.Arn}/invocations
               responses: {}
         swagger: '2.0'
   searchPhotosLambdaAPIPermissionProd:
@@ -69,7 +69,7 @@ Resources:
     Properties:
       Action: 'lambda:InvokeFunction'
       Principal: apigateway.amazonaws.com
-      FunctionName: !Ref searchPhotos
+      FunctionName: !Ref searchPhotostest
       SourceArn: !Sub
         - >-
           arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${__ApiId__}/${__Stage__}/GET/search-photos
@@ -78,11 +78,11 @@ Resources:
   photosBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: photoalbumcoms3
+      BucketName: photoalbumcomstest
   ESInstance:
     Type: 'AWS::OpenSearchService::Domain'
     Properties:
-      DomainName: photos
+      DomainName: photos-test7-domain
       ClusterConfig:
         InstanceType: t3.small.search
         InstanceCount: 1
