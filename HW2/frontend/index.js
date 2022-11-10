@@ -11,7 +11,7 @@ $(document).ready(function () {
 
   function callUploadAPI(image, customLabels) {
       var filename = document.getElementById("image-file").value;
-      console.log(filename);
+      console.log('filename'+filename);
       var additionalparams = {
           headers: {
               "Content-Type": "image/jpeg",
@@ -19,16 +19,14 @@ $(document).ready(function () {
           }
       }
       var params = {
-          'item': document.getElementById("image-file").value,
+        //   'item': document.getElementById("image-file").value,
+          'item': image['name'],
           'folder':'photoalbumcoms2',
           'Content-Type': "image/jpeg",
-          'Access-Control-Allow-Origin': "*",
-          'Access-Control-Allow-Headers': "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", 
-          'Access-Control-Allow-Methods': "OPTIONS,PUT",
-          'Content-Encoding': 'base64',
+        //   'Content-Encoding': 'base64',
           'x-amz-meta-customLabels': customLabels
       };
-      console.log(additionalparams);
+      console.log(params);
 
       var sdk = apigClientFactory.newClient({
           apiKey: "UfVIK5GvQU81v7PK9xZvV23I8DGVbRvU9LPwjjTV"
@@ -59,8 +57,12 @@ $(document).ready(function () {
   }
 
   function upload() {
-      var img = document.getElementById("imagebase64").value;
-      var comma_index = img.indexOf(",");
+    //   var img = document.getElementById("imagebase64").value;
+      var img = document.getElementById("image").files[0];
+      console.log(img);
+      img.constructor = () => img;
+
+    //   var comma_index = img.indexOf(",");
       var custom1 = document.getElementById("customLabel1").value;
       var custom2 = document.getElementById("customLabel2").value;
       var custom3 = document.getElementById("customLabel3").value;
@@ -69,10 +71,10 @@ $(document).ready(function () {
       console.log( "custom3="+custom3 )
       var customLabels = custom1 + "," + custom2 + "," + custom3
       console.log( "customLabels="+customLabels )
-      var image_str = img.substring(comma_index+1);
-      console.log("image_str: "+image_str)
+    //   var image_str = img.substring(comma_index+1);
+    //   console.log("image_str: "+image_str)
 
-      callUploadAPI(image_str, customLabels).then((response) => {
+      callUploadAPI(img, customLabels).then((response) => {
           console.log(response);
       });
       $('.upload-message').html("File Uploaded");
@@ -93,25 +95,25 @@ $(document).ready(function () {
       }
   })
 
-  function readFile() {
+//   function readFile() {
 
-      if (this.files && this.files[0]) {
+//       if (this.files && this.files[0]) {
 
-          var FR = new FileReader();
-          console.log(this.files[0]['name']);
-          var filename = this.files[0]['name']
-          document.getElementById("image-file").setAttribute("value", filename);
-          FR.addEventListener("load", function(e) {
-              document.getElementById("img").src = e.target.result;
-              document.getElementById("imagebase64").setAttribute("value", e.target.result);
-          }); 
+//           var FR = new FileReader();
+//           console.log(this.files[0]['name']);
+//           var filename = this.files[0]['name']
+//           document.getElementById("image-file").setAttribute("value", filename);
+//           FR.addEventListener("load", function(e) {
+//               document.getElementById("img").src = e.target.result;
+//               document.getElementById("imagebase64").setAttribute("value", e.target.result);
+//           }); 
 
-          FR.readAsDataURL( this.files[0] );
-      }
+//           FR.readAsDataURL( this.files[0] );
+//       }
       
-  }
+//   }
 
-  document.getElementById("image").addEventListener("change", readFile);
+//   document.getElementById("image").addEventListener("change", readFile);
 
   $(function () {
       // check for support (webkit only)
