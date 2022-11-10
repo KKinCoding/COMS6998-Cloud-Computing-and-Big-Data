@@ -13,7 +13,7 @@ Resources:
         Variables:
           REGION: us-east-1
       Handler: lambda.lambda_handler
-      CodeUri: ./index-photos
+      CodeUri: index-photos
       Role: 'arn:aws:iam::284091107813:role/CloudFormationPipeline'
       Timeout: 30
       Runtime: python3.9
@@ -30,7 +30,7 @@ Resources:
         Variables:
           REGION: us-east-1
       Handler: lambda.lambda_handler
-      CodeUri: ./search-photos
+      CodeUri: search-photos
       Role: 'arn:aws:iam::284091107813:role/CloudFormationPipeline'
       Timeout: 30
       Runtime: python3.9
