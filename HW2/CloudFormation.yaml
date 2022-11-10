@@ -13,7 +13,6 @@ Resources:
         Variables:
           REGION: us-east-1
       Handler: lambda.lambda_handler
-      CodeUri: index-photos
       Role: 'arn:aws:iam::284091107813:role/CloudFormationPipeline'
       Timeout: 30
       Runtime: python3.9
@@ -30,7 +29,6 @@ Resources:
         Variables:
           REGION: us-east-1
       Handler: lambda.lambda_handler
-      CodeUri: search-photos
       Role: 'arn:aws:iam::284091107813:role/CloudFormationPipeline'
       Timeout: 30
       Runtime: python3.9
@@ -84,7 +82,7 @@ Resources:
   ESInstance:
     Type: 'AWS::OpenSearchService::Domain'
     Properties:
-      DomainName: photos-test7-domain
+      DomainName: photos-test8-domain
       ClusterConfig:
         InstanceType: t3.small.search
         InstanceCount: 1
