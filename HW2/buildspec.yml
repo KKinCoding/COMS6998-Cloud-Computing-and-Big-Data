@@ -2,9 +2,9 @@ version: 0.1
 phases:
   install:
     commands:
-      - aws cloudformation package --template-file HW2/samTemplate.yaml --s3-bucket photoalbumcoms2 --output-template-file outputsamtemplate.yml
+      - sam build —-template-file HW2/samTemplate.yaml
+      - sam deploy —-template-file .aws-sam/build/template.yaml -—stack-name stack-photoAlbum
 artifacts:
   type: zip
   files:
-    - HW2/samTemplate.yaml 
-    - outputsamtemplate.yml
+    - HW2/samTemplate.yaml
