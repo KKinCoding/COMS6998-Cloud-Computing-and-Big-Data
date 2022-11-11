@@ -1,16 +1,10 @@
-version: 0.2
+version: 0.1
 phases:
   install:
-    runtime-versions:
-      python: 3.8
     commands:
-      - pip install --upgrade pip
-      - pip install --upgrade awscli aws-sam-cli
-  build:
-    commands:
-      - sam build —-template-file HW2/samTemplate.yaml
-      - sam deploy —-template-file .aws-sam/build/template.yaml -—stack-name stack-photoAlbum
+      - aws cloudformation package --template-file HW2/samTemplate.yaml --s3-bucket photoalbumcoms2 --output-template-file outputsamtemplate.yml
 artifacts:
   type: zip
   files:
     - HW2/samTemplate.yaml
+    - outputsamtemplate.yml
