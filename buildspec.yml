@@ -1,0 +1,25 @@
+version: 0.2
+
+
+phases:
+  install:
+      runtime-versions:
+       nodejs: 14
+      commands:
+       - echo installing serverless framework
+       - npm install -g serverless
+  pre_build:
+    commands:
+      - echo install pre build commands
+  build:
+    commands:
+      - echo Installing NPM Packages
+      - npm install
+      - echo Running tests
+      - npm run test
+  post_build:
+    commands:
+      - echo Entering Post_Build Phase
+artifacts:
+   files:
+    - '**/*'
