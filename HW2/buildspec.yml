@@ -1,25 +1,11 @@
-version: 0.2
-
-
+version: 0.1
 phases:
   install:
-      runtime-versions:
-       nodejs: 14
-      commands:
-       - echo installing serverless framework
-       - npm install -g serverless
-  pre_build:
     commands:
-      - echo install pre build commands
-  build:
-    commands:
-      - echo Installing NPM Packages
-      - npm install
-      - echo Running tests
-      - npm run test
-  post_build:
-    commands:
-      - echo Entering Post_Build Phase
+      - aws cloudformation create-stack --stack-name photoAlbumStack --template-body file://HW2/CloudFormation.yaml --capabilities CAPABILITY_AUTO_EXPAND
+      - aws cloudformation package --template-file HW2/samTemplate.yaml --s3-bucket photoalbum-asset-bucket --output-template-file outputsamtemplate.yml
 artifacts:
-   files:
-    - '**/*'
+  type: zip
+  files:
+    - HW2/samTemplate.yaml
+    - outputsamtemplate.yml
