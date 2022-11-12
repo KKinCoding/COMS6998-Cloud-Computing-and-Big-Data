@@ -1,9 +1,11 @@
-version: 0.1
+version: 0.2
 phases:
   install:
+    runtime-versions:
+        python: 3.9
+   build:
     commands:
-      - aws cloudformation create-stack --stack-name photoAlbumStack --template-body file://HW2/CloudFormation.yaml --capabilities CAPABILITY_AUTO_EXPAND
-      - aws cloudformation package --template-file HW2/samTemplate.yaml --s3-bucket photoalbum-asset-bucket --output-template-file outputsamtemplate.yml
+      - sam package --template-file HW2/samTemplate.yaml --s3-bucket photoalbum-asset-bucket --output-template-file outputsamtemplate.yml
 artifacts:
   type: zip
   files:
