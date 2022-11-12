@@ -2,7 +2,7 @@ version: 0.1
 phases:
   install:
     commands:
-      - aws cloudformation package --template-file HW2/samTemplate.yaml --s3-bucket photoalbumcoms2 --output-template-file outputsamtemplate.yml
+      - aws cloudformation package --template-file HW2/samTemplate.yaml --s3-bucket photoalbumcoms2 --output-template-file outputsamtemplate.yml --capabilities CAPABILITY_AUTO_EXPAND
 artifacts:
   type: zip
   files:
